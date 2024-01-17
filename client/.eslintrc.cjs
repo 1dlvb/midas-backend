@@ -4,11 +4,12 @@ module.exports = {
   extends: [
     "airbnb",
     "airbnb-typescript",
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react-hooks/recommended',
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
     "plugin:prettier/recommended",
-    "prettier"
+    "prettier",
+    "plugin:storybook/recommended"
   ],
   parserOptions: {
     project: ["./tsconfig.json", "./tsconfig.node.json"],
@@ -51,6 +52,12 @@ module.exports = {
         "ts": "never",
         "tsx": "never",
         "": "never"
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
       }
     ],
     'react-refresh/only-export-components': [
