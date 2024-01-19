@@ -1,4 +1,4 @@
-package ru.midas.server.models;
+package ru.midas.server.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -8,6 +8,7 @@ import lombok.Data;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Product {
     @Id
+    @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String Name;
@@ -22,5 +23,4 @@ public abstract class Product {
                 "name=" + getName() + "\n" +
                 "quantity=" + getQuantity() + "\n";
     }
-
 }

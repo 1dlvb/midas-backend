@@ -1,4 +1,4 @@
-package ru.midas.server.models;
+package ru.midas.server.model;
 
 import jakarta.persistence.*;
 import lombok.*;
