@@ -1,0 +1,29 @@
+services:
+  db:
+    ports:
+      - 5432:5432
+    container_name: postgresql_container
+    image: postgres
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=midas_db
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_USER=${DB_USERNAME}
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+  backend:
+    build:
+      context: .
+    container_name: server_container
+    ports:
+      - "8181:8099"
+    env_file:
+      - .env
+    environment:
+      - spring.datasource.url=${DB_URL_DOCKER}
+      - spring.datasource.username=${DB_USERNAME}
+      - spring.datasource.password=${DB_PASSWORD}
+    depends_on:
+      - db
+    restart: always
