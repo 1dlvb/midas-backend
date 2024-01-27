@@ -15,35 +15,35 @@ import java.util.List;
 public class ProductController {
 
     @NonNull
-    private ProductService service;
+    private ProductService productService;
     @GetMapping
     public List<Product> getAllProduct(){
-        return service.fetchProductList();
+        return productService.fetchProductList();
     }
     @GetMapping("/products-by-id/{id}")
     public List<Product> getAllProduct(@PathVariable Long id){
-        return service.findProductsByCategoryId(id);
+        return productService.findProductsByCategoryId(id);
     }
 
     @PostMapping("/save")
     public Product saveProduct(@RequestBody Product product){
-        return service.saveProduct(product);
+        return productService.saveProduct(product);
     }
 
     @GetMapping("/{id}")
     public Product findById(@PathVariable Long id){
-        return service.findProductById(id);
+        return productService.findProductById(id);
     }
 
     @PutMapping(value = "/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Product updateProduct(@RequestBody Product product, @PathVariable Long id){
         product.setId(id);
-        return service.updateProduct(product);
+        return productService.updateProduct(product);
     }
 
     @DeleteMapping("/delete/{id}")
     public String deleteProduct(@PathVariable Long id){
-        service.deleteProduct(id);
+        productService.deleteProduct(id);
         return String.format("Id:%d is deleted successfully.", id);
     }
 }
