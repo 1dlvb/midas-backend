@@ -20,11 +20,6 @@ public class CategoryServiceImpl implements CategoryService {
         return repository.findAll();
     }
 
-//    @Override
-//    public List<Category> findByProductsId(Long productId) {
-//        return repository.findByProductsId(productId);
-//    }
-
     @Override
     public Category saveCategory(Category category) {
         return repository.save(category);

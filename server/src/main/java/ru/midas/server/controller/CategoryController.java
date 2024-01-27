@@ -5,9 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.midas.server.model.Category;
-import ru.midas.server.model.Product;
 import ru.midas.server.service.CategoryService;
-import ru.midas.server.service.ProductService;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,11 +21,6 @@ public class CategoryController {
     public List<Category> getAllCategories(){
         return categoryService.fetchCategoryList();
     }
-
-//    @GetMapping("/products/{product_id}")
-//    public List<Category> getAllProductsCategoriesById(@PathVariable Long product_id){
-//        return categoryService.findByProductsId(product_id);
-//    }
 
     @PostMapping("/save")
     public Category saveCategory(@RequestBody Category category){
