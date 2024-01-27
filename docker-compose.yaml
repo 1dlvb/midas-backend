@@ -5,9 +5,9 @@ services:
     env_file:
       - .env
     environment:
-      - POSTGRES_DB=midas_db
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_DB=${ELEPHANT_DB}
+      - POSTGRES_PASSWORD=${ELEPHANT_DB_USERNAME}
+      - POSTGRES_USER=${ELEPHANT_DB_PASSWORD}
     volumes:
       - ./postgres-data:/var/lib/postgresql@14/data
     restart: always
@@ -20,7 +20,7 @@ services:
     env_file:
       - .env
     environment:
-      - spring.datasource.url=@{ELEPHANT_DB_URL}
+      - spring.datasource.url=${ELEPHANT_DB_URL}
       - spring.datasource.username=${ELEPHANT_DB_USERNAME}
       - spring.datasource.password=${ELEPHANT_DB_PASSWORD}
       - spring.datasource.hikari.minimumIdle = 2
