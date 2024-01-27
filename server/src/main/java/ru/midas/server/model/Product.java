@@ -23,22 +23,22 @@ public class Product {
     private Category category;
 
     @Column(nullable = false)
-    private String Name;
+    private String name;
 
     @Column(nullable = false)
-    private String Description;
+    private String description;
 
     @Column(nullable = false)
-    private String ImageUrl;
+    private String imageUrl;
 
     @Column(nullable = false)
-    private Integer Quantity;
+    private Integer quantity;
 
     @Column(nullable = false)
-    private Integer Price;
+    private Double price;
 
     @Column(nullable = false)
-    private Integer Weight;
+    private Integer weight;
 
 }
 
