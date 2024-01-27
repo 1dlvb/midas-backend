@@ -20,9 +20,10 @@ services:
     env_file:
       - .env
     environment:
-      - spring.datasource.url=jdbc:postgresql://db:5432/midas_db
-      - spring.datasource.username=${DB_USERNAME}
-      - spring.datasource.password=${DB_PASSWORD}
+      - spring.datasource.url=@{ELEPHANT_DB_URL}
+      - spring.datasource.username=${ELEPHANT_DB_USERNAME}
+      - spring.datasource.password=${ELEPHANT_DB_PASSWORD}
+      - spring.datasource.hikari.minimumIdle = 2
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
       - db
