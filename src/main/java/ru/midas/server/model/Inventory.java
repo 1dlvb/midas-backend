@@ -21,4 +21,7 @@ public class Inventory {
     @JoinColumn(name = "product_id", nullable = false, unique = true)
     private Product product;
 
+    @Column(nullable = false)
+    private Integer quantity;
+
 }
