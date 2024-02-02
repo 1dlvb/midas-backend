@@ -8,7 +8,6 @@ import ru.midas.server.repository.CategoryRepository;
 import ru.midas.server.service.CategoryService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

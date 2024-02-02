@@ -8,7 +8,6 @@ import ru.midas.server.model.Category;
 import ru.midas.server.service.CategoryService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
