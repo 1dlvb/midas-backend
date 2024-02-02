@@ -23,11 +23,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findProductsByCategoryId(Long categoryId) {
-        return repository.findProductsByCategoryId(categoryId);
-    }
-
-    @Override
     public Product saveProduct(Product product) {
         return repository.save(product);
     }

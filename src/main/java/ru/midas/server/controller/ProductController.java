@@ -20,10 +20,6 @@ public class ProductController {
     public List<Product> getAllProduct(){
         return productService.fetchProductList();
     }
-    @GetMapping("/products-by-id/{id}")
-    public List<Product> getAllProduct(@PathVariable Long id){
-        return productService.findProductsByCategoryId(id);
-    }
 
     @PostMapping("/save")
     public Product saveProduct(@RequestBody Product product){
