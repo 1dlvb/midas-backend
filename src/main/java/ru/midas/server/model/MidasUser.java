@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-//import jakarta.validation.constraints.Pattern;
 
 
 @Data
@@ -13,22 +12,28 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "midas_users")
 public class MidasUser {
+    private static final String SEQ_NAME = "midas_user_seq";
 
     @Id
     @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_NAME)
+    @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME, allocationSize = 1)
+    private Long id;
 
     @Column(nullable = false)
-    String name;
+    private String fullName;
 
     //TODO: add number validation
     @Column(nullable = false)
-    String phoneNumber;
+    private String phoneNumber;
 
-//    @Column(nullable = true)
-//    Cart cart;
+    @OneToOne(cascade = CascadeType.REMOVE)
+    private Cart cart;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 
 }

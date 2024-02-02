@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface ProductService {
     List<Product> fetchProductList();
-    List<Product> findProductsByCategoryId(Long categoryId);
     Product saveProduct(Product product);
 
     Product findProductById(Long id);
