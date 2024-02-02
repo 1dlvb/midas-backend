@@ -37,7 +37,7 @@ public class MidasUserServiceImpl implements MidasUserService {
 
     @Override
     public void deleteUser(Long id) {
-        repository.deleteById(id);
+        repository.delete(this.findUserById(id));
     }
 
 

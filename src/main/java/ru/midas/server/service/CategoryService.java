@@ -11,7 +11,7 @@ public interface CategoryService {
 //    List<Category> findByProductsId(Long productId);
     Category saveCategory(Category category);
 
-    Optional<Category> findCategoryById(Long id);
+    Category findCategoryById(Long id);
 
     Category updateCategory(Category category);
 
