@@ -8,7 +8,6 @@ import ru.midas.server.repository.CategoryRepository;
 import ru.midas.server.service.CategoryService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,8 +25,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Optional<Category> findCategoryById(Long id) {
-        return repository.findById(id);
+    public Category findCategoryById(Long id) {
+        return repository.findCategoryById(id);
     }
 
     @Override
@@ -37,6 +36,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void deleteCategory(Long id) {
-        repository.deleteById(id);
+        repository.delete(this.findCategoryById(id));
     }
 }

@@ -12,28 +12,36 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "midas_users")
+@Table(name = "midas_user")
 public class MidasUser {
-    private static final String SEQ_NAME = "midas_user_seq";
 
     @Id
-    @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_NAME)
-    @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME, allocationSize = 1)
+    @Column(unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String fullName;
+    @Column(nullable = false, unique = true)
+    private String username;
 
-    //TODO: add number validation
+    @Column(nullable = false, length = 1000)
+    private String password;
+
+    @Column(nullable = false)
+    private String firstName;
+
+    @Column(nullable = false)
+    private String LastName;
+
+    @Column(nullable = false)
+    private String email;
+
     @Column(nullable = false)
     private String phoneNumber;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
-    private Cart cart;
+    @Column(length = 512)
+    private String address;
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
 
 }
