@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -25,18 +26,22 @@ public class MidasOrder {
     private Long id;
 
     @CreationTimestamp
+    @Column(nullable = false)
     private LocalDateTime created;
 
     @UpdateTimestamp
+    @Column(nullable = false)
     private LocalDateTime updated;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private MidasUser user;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<MidasOrderQuantities> quantities = new ArrayList<>();
+
+    @Column(nullable = false)
     private double sum;
-    private String address;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<OrderDetails> details;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
