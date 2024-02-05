@@ -3,7 +3,10 @@ package ru.midas.server.service.impl;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.midas.server.api.model.RegistrationBody;
+import ru.midas.server.exception.UserAlreadyExistsException;
 import ru.midas.server.model.MidasUser;
+import ru.midas.server.model.Role;
 import ru.midas.server.repository.MidasUserRepository;
 import ru.midas.server.service.MidasUserService;
 
@@ -39,6 +42,21 @@ public class MidasUserServiceImpl implements MidasUserService {
     public void deleteUser(Long id) {
         repository.delete(this.findUserById(id));
     }
+    @Override
+    public MidasUser registerUser(RegistrationBody registrationBody) throws UserAlreadyExistsException {
+        if(repository.findMidasUserByEmail(registrationBody.getEmail()).isPresent() ||
+                repository.findMidasUserByUsernameIgnoreCase(registrationBody.getUsername()).isPresent()){
+            throw new UserAlreadyExistsException();
+        }
+        MidasUser user = new MidasUser();
+        user.setEmail(registrationBody.getEmail());
+        user.setUsername(registrationBody.getUsername());
+        user.setFirstName(registrationBody.getFirstName());
+        user.setLastName(registrationBody.getLastName());
+        user.setPhoneNumber(registrationBody.getPhoneNumber());
+        //TODO: encrypt password
+        user.setPassword(registrationBody.getPassword());
 
-
+        return repository.save(user);
+    }
 }
