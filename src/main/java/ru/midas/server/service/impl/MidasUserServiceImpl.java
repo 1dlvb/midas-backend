@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import ru.midas.server.api.model.RegistrationBody;
 import ru.midas.server.exception.UserAlreadyExistsException;
 import ru.midas.server.model.MidasUser;
-import ru.midas.server.model.Role;
 import ru.midas.server.repository.MidasUserRepository;
 import ru.midas.server.service.MidasUserService;
 
@@ -43,7 +42,7 @@ public class MidasUserServiceImpl implements MidasUserService {
         repository.delete(this.findUserById(id));
     }
     @Override
-    public MidasUser registerUser(RegistrationBody registrationBody) throws UserAlreadyExistsException {
+    public void registerUser(RegistrationBody registrationBody) throws UserAlreadyExistsException {
         if(repository.findMidasUserByEmail(registrationBody.getEmail()).isPresent() ||
                 repository.findMidasUserByUsernameIgnoreCase(registrationBody.getUsername()).isPresent()){
             throw new UserAlreadyExistsException();
@@ -57,6 +56,6 @@ public class MidasUserServiceImpl implements MidasUserService {
         //TODO: encrypt password
         user.setPassword(registrationBody.getPassword());
 
-        return repository.save(user);
+        repository.save(user);
     }
 }

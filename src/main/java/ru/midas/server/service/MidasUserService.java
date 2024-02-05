@@ -11,7 +11,7 @@ public interface MidasUserService {
     MidasUser findUserById(Long id);
     MidasUser saveUser(MidasUser midasUser);
     MidasUser updateUser(MidasUser midasUser);
-    MidasUser registerUser(RegistrationBody registrationBody) throws UserAlreadyExistsException;
+    void registerUser(RegistrationBody registrationBody) throws UserAlreadyExistsException;
 
     void deleteUser(Long id);
 
