@@ -7,6 +7,7 @@ import ru.midas.server.api.model.RegistrationBody;
 import ru.midas.server.exception.UserAlreadyExistsException;
 import ru.midas.server.model.MidasUser;
 import ru.midas.server.repository.MidasUserRepository;
+import ru.midas.server.service.EncryptionService;
 import ru.midas.server.service.MidasUserService;
 
 import java.util.List;
@@ -16,6 +17,8 @@ import java.util.List;
 public class MidasUserServiceImpl implements MidasUserService {
     @NonNull
     private final MidasUserRepository repository;
+    @NonNull
+    private final EncryptionService encryptionService;
 
     @Override
     public List<MidasUser> fetchAllUsers(){
@@ -53,8 +56,7 @@ public class MidasUserServiceImpl implements MidasUserService {
         user.setFirstName(registrationBody.getFirstName());
         user.setLastName(registrationBody.getLastName());
         user.setPhoneNumber(registrationBody.getPhoneNumber());
-        //TODO: encrypt password
-        user.setPassword(registrationBody.getPassword());
+        user.setPassword(encryptionService.encryptPassword(registrationBody.getPassword()));
 
         repository.save(user);
     }
