@@ -1,6 +1,5 @@
 package ru.midas.server.service.impl;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,11 +14,12 @@ import ru.midas.server.service.EncryptionService;
 public class EncryptionServiceImpl implements EncryptionService {
 
     private String salt;
+
+    @Value("${encryption.salt.rounds}")
+    private int saltRounds;
     @Override
     @PostConstruct
     public void postConstruct() {
-        Dotenv dotenv = Dotenv.load();
-        int saltRounds = Integer.parseInt(dotenv.get("ENCRYPTION.SALT.ROUNDS"));
         salt = BCrypt.gensalt(saltRounds);
     }
 

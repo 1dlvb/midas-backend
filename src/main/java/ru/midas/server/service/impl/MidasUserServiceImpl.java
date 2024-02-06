@@ -8,6 +8,7 @@ import ru.midas.server.api.model.RegistrationBody;
 import ru.midas.server.exception.UserAlreadyExistsException;
 import ru.midas.server.model.MidasUser;
 import ru.midas.server.repository.MidasUserRepository;
+//import ru.midas.server.service.EncryptionService;
 import ru.midas.server.service.EncryptionService;
 import ru.midas.server.service.JWTService;
 import ru.midas.server.service.MidasUserService;
@@ -18,10 +19,13 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class MidasUserServiceImpl implements MidasUserService {
+
     @NonNull
     private final MidasUserRepository repository;
+
     @NonNull
     private final EncryptionService encryptionService;
+
     @NonNull
     private final JWTService jwtService;
 
