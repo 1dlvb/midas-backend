@@ -2,10 +2,9 @@ package ru.midas.server.service.impl;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.annotation.PostConstruct;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.midas.server.model.MidasUser;
 import ru.midas.server.service.JWTService;
@@ -14,11 +13,14 @@ import java.util.Date;
 
 @Service
 public class JWTServiceImpl implements JWTService {
+    @Value("${jwt.algorithm.key}")
+    private String algorithmKey;
 
-    private final Dotenv dotenv = Dotenv.load();
-    private final String algorithmKey = dotenv.get("JWT.ALGORITHM.KEY");
-    private final String issuer = dotenv.get("JWT.ISSUER");
-    private final int expiryInSeconds = Integer.parseInt(dotenv.get("JWT.EXPIRY_IN_SECONDS"));
+    @Value("${jwt.issuer}")
+    private String issuer;
+
+    @Value("${jwt.expiry.in.seconds}")
+    private int expiryInSeconds;
 
     @Setter
     @Getter

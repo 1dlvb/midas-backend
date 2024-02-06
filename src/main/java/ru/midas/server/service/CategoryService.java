@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface CategoryService {
     List<Category> fetchCategoryList();
-//    List<Category> findByProductsId(Long productId);
     Category saveCategory(Category category);
 
     Category findCategoryById(Long id);
