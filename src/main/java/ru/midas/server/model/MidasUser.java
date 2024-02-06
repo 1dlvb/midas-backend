@@ -32,7 +32,7 @@ public class MidasUser {
     @Column(nullable = false)
     private String LastName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)

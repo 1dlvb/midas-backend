@@ -2,34 +2,34 @@ package ru.midas.server.api.model;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.NonNull;
 
 @Data
 public class RegistrationBody {
 
-    @NonNull
+    @NotNull
     @NotBlank
     private String username;
 
     @Email
-    @NonNull
+    @NotNull
     @NotBlank
     private String email;
 
-    @NonNull
+    @NotNull
     @NotBlank
     private String password;
 
-    @NonNull
+    @NotNull
     @NotBlank
     private String firstName;
 
-    @NonNull
+    @NotNull
     @NotBlank
     private String lastName;
 
-    @NonNull
+    @NotNull
     @NotBlank
     private String phoneNumber;
 }
