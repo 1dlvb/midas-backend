@@ -13,14 +13,15 @@ import java.util.Date;
 
 @Service
 public class JWTServiceImpl implements JWTService {
-    @Value("${jwt.algorithm.key}")
+
+    @Value("jwt.algorithm.key")
     private String algorithmKey;
 
-    @Value("${jwt.issuer}")
+    @Value("jwt.issuer")
     private String issuer;
 
-    @Value("${jwt.expiry.in.seconds}")
-    private int expiryInSeconds;
+    @Value("jwt.expiry.in.seconds")
+    private String expiryInSeconds;
 
     @Setter
     @Getter
@@ -37,7 +38,7 @@ public class JWTServiceImpl implements JWTService {
     public String generateJWT(MidasUser user){
         return JWT.create()
                 .withClaim(EMAIL_KEY, user.getEmail())
-                .withExpiresAt(new Date(System.currentTimeMillis() + (1000L * expiryInSeconds)))
+                .withExpiresAt(new Date(System.currentTimeMillis() + (1000L * Integer.parseInt(expiryInSeconds))))
                 .withIssuer(issuer)
                 .sign(algorithm);
     }

@@ -1,14 +1,12 @@
 package ru.midas.server.service.impl;
 
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.midas.server.api.model.LoginBody;
 import ru.midas.server.api.model.RegistrationBody;
 import ru.midas.server.exception.UserAlreadyExistsException;
 import ru.midas.server.model.MidasUser;
 import ru.midas.server.repository.MidasUserRepository;
-//import ru.midas.server.service.EncryptionService;
 import ru.midas.server.service.EncryptionService;
 import ru.midas.server.service.JWTService;
 import ru.midas.server.service.MidasUserService;
@@ -17,17 +15,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class MidasUserServiceImpl implements MidasUserService {
 
-    @NonNull
     private final MidasUserRepository repository;
-
-    @NonNull
     private final EncryptionService encryptionService;
-
-    @NonNull
     private final JWTService jwtService;
+
 
     @Override
     public List<MidasUser> fetchAllUsers(){
