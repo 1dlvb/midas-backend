@@ -3,6 +3,7 @@ package ru.midas.server.api.controller.auth;
 import jakarta.validation.Valid;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import ru.midas.server.service.MidasUserService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/midas/auth")
+@ComponentScan("ru.midas.server.service")
 public class AuthenticationController {
 
     @NonNull
