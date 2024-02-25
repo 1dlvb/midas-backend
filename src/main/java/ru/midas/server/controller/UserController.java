@@ -1,10 +1,12 @@
-package ru.midas.server.api.controller;
+package ru.midas.server.controller;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.midas.server.model.MidasUser;
+import ru.midas.server.service.AuthService;
 import ru.midas.server.service.MidasUserService;
 
 import java.util.List;
@@ -15,15 +17,16 @@ import java.util.List;
 public class UserController {
     @NonNull
     private final MidasUserService userService;
+    private final AuthService authService;
 
     @GetMapping()
-    public List<MidasUser> fetchAllUsers(){
-        return userService.fetchAllUsers();
+    public ResponseEntity<List<MidasUser>> fetchAllUsers(){
+        return ResponseEntity.ok().body(userService.fetchAllUsers());
     }
 
     @PostMapping("/save")
-    public MidasUser saveUser(@RequestBody MidasUser midasUser){
-        return userService.saveUser(midasUser);
+    public ResponseEntity<MidasUser> saveUser(@RequestBody MidasUser midasUser){
+        return ResponseEntity.ok().body(userService.saveUser(midasUser));
     }
 
     @GetMapping("/{id}")
