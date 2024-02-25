@@ -15,9 +15,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("api/v1/midas/user")
 public class UserController {
+
     @NonNull
     private final MidasUserService userService;
-    private final AuthService authService;
 
     @GetMapping()
     public ResponseEntity<List<MidasUser>> fetchAllUsers(){
