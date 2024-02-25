@@ -1,78 +1,79 @@
 package ru.midas.server.service.impl;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import ru.midas.server.api.model.LoginBody;
-import ru.midas.server.api.model.RegistrationBody;
 import ru.midas.server.exception.UserAlreadyExistsException;
+import ru.midas.server.model.LoginBody;
 import ru.midas.server.model.MidasUser;
+import ru.midas.server.model.RegistrationBody;
+import ru.midas.server.model.Role;
 import ru.midas.server.repository.MidasUserRepository;
 import ru.midas.server.service.EncryptionService;
-import ru.midas.server.service.JWTService;
 import ru.midas.server.service.MidasUserService;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MidasUserServiceImpl implements MidasUserService {
 
-    private final MidasUserRepository repository;
+    private final MidasUserRepository userRepository;
     private final EncryptionService encryptionService;
-    private final JWTService jwtService;
-
+    private static final Logger log = LoggerFactory.getLogger(MidasUserService.class);
 
     @Override
     public List<MidasUser> fetchAllUsers(){
-        return repository.findAll();
+        return userRepository.findAll();
     }
 
     @Override
     public MidasUser findUserById(Long id) {
-        return repository.findUserById(id);
+        log.info("Searching for user by his id.");
+        return userRepository.findUserById(id);
+    }
+
+    @Override
+    public Optional<MidasUser> findUserByPhoneNumber(String phoneNumber) {
+        return userRepository.findUserByPhoneNumber(phoneNumber);
     }
 
     @Override
     public MidasUser saveUser(MidasUser midasUser) {
-        return repository.save(midasUser);
+        log.info(String.format("Saving new user with id %d to the database.", midasUser.getId()));
+        return userRepository.save(midasUser);
     }
 
     @Override
     public MidasUser updateUser(MidasUser midasUser) {
-        return repository.save(midasUser);
+        return userRepository.save(midasUser);
     }
 
     @Override
     public void deleteUser(Long id) {
-        repository.delete(this.findUserById(id));
+        userRepository.deleteById(id);
     }
     @Override
     public void registerUser(RegistrationBody registrationBody) throws UserAlreadyExistsException {
-        if(repository.findMidasUserByEmail(registrationBody.getEmail()).isPresent() ||
-                repository.findMidasUserByUsernameIgnoreCase(registrationBody.getUsername()).isPresent()){
+        if(userRepository.findUserByPhoneNumber(registrationBody.getEmail()).isPresent()){
             throw new UserAlreadyExistsException();
         }
         MidasUser user = new MidasUser();
-        user.setEmail(registrationBody.getEmail());
-        user.setUsername(registrationBody.getUsername());
-        user.setFirstName(registrationBody.getFirstName());
-        user.setLastName(registrationBody.getLastName());
         user.setPhoneNumber(registrationBody.getPhoneNumber());
         user.setPassword(encryptionService.encryptPassword(registrationBody.getPassword()));
 
-        repository.save(user);
+        user.setName(registrationBody.getName());
+        user.setEmail(registrationBody.getEmail());
+        user.setRoles(Collections.singleton(Role.USER));
+        user.setAddress(null);
+        userRepository.save(user);
     }
-    @Override
-    public String loginUser(LoginBody loginBody){
-        Optional<MidasUser> userOptional = repository.findMidasUserByEmail(loginBody.getEmail());
 
-        if(userOptional.isPresent()){
-            MidasUser user = userOptional.get();
-            if (encryptionService.verifyPassword(loginBody.getPassword(), user.getPassword())){
-                return jwtService.generateJWT(user);
-            }
-        }
+    @Override
+    public String loginUser(LoginBody loginBody) {
         return null;
     }
+
+
 }

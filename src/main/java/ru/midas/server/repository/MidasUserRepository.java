@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface MidasUserRepository extends JpaRepository<MidasUser, Long> {
     MidasUser findUserById(Long id);
-    Optional<MidasUser> findMidasUserByEmail(String email);
-    Optional<MidasUser> findMidasUserByUsernameIgnoreCase(String username);
+    Optional<MidasUser> findUserByPhoneNumber(String phoneNumber);
+
 }
