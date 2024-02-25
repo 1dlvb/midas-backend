@@ -1,4 +1,4 @@
-package ru.midas.server.api.model;
+package ru.midas.server.model;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

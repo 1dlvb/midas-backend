@@ -1,4 +1,4 @@
-package ru.midas.server.api.controller;
+package ru.midas.server.controller;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
