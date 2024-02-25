@@ -1,4 +1,4 @@
-package ru.midas.server.api.model;
+package ru.midas.server.model;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -10,26 +10,17 @@ public class RegistrationBody {
 
     @NotNull
     @NotBlank
-    private String username;
+    private String phoneNumber;
 
-    @Email
     @NotNull
     @NotBlank
-    private String email;
+    private String name;
 
     @NotNull
     @NotBlank
     private String password;
 
-    @NotNull
-    @NotBlank
-    private String firstName;
+    @Email
+    private String email;
 
-    @NotNull
-    @NotBlank
-    private String lastName;
-
-    @NotNull
-    @NotBlank
-    private String phoneNumber;
 }

@@ -1,4 +1,4 @@
-package ru.midas.server.api.model;
+package ru.midas.server.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,5 +8,4 @@ import lombok.Setter;
 public class LoginResponse {
 
     private String jwt;
-
 }
